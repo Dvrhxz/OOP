@@ -227,7 +227,6 @@ while run:
     if rect_1.y > 706: rect_1.y = 705
 
     #enemy movement
-    # Inside the game loop
     if random.randint(1, 30) == 1:  # Change direction randomly every 30 frames
         kok_direction = random.choice(["left", "right"])
 
