@@ -12,7 +12,7 @@ pygame.display.set_caption("Koktale")
 #Load Sound
 bg_music = pygame.mixer.Sound('Whispers in the Twilight.mp3')
 bg_music.play(loops=-1)
-bg_music.set_volume(0.3)
+bg_music.set_volume(0.2)
 hit = pygame.mixer.Sound('undertale-damage-taken.mp3')
 
 # Load images
