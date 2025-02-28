@@ -32,6 +32,10 @@ rect_1.center = (683, 580)
 kok_enemy = kok2.get_rect()
 kok_enemy.center = (683, 200)
 
+#enemy movement
+kok_speed = 5  # Adjust speed
+kok_direction = random.choice(["left", "right"])  # Initial random direction
+
 bullet = pygame.image.load("jellyfish_.png")
 bullet2 = pygame.transform.scale_by(bullet, 0.1)
 bullet2 = pygame.transform.flip(bullet2, False, True)
