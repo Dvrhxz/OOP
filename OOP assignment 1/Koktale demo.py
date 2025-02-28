@@ -43,6 +43,68 @@ bullet2 = pygame.transform.flip(bullet2, False, True)
 Fight = pygame.image.load("Fight.png").convert_alpha()
 Fight_hover = pygame.image.load("FightHover.png").convert_alpha()
 
+class HealthBar():
+    def __init__(self, x, y, w, h, max_hp):
+        self.x = x
+        self.y = y
+        self.w = w
+        self.h = h
+        self.hp = max_hp
+        self.max_hp = max_hp
+
+    def DrawHp(self, surface):
+        ratio = self.hp / self.max_hp
+        pygame.draw.rect(surface,"red", (self.x, self.y, self.w, self.h))
+        pygame.draw.rect(surface, "yellow", (self.x, self.y, self.w * ratio, self.h))
+
+health_bar = HealthBar(800, 780, 100, 90, 20)
+
+text_font = pygame.font.SysFont("Pixel Operator", 85, True)
+def draw_text(text, font, text_col, x, y):
+    img = font.render(text, font, text_col)
+    screen.blit(img, (x, y))
+
+# Button class
+class Button():
+    def __init__(self, x, y, image, hover_image, scale):
+        width = image.get_width()
+        height = image.get_height()
+
+        # Store both normal and hover images
+        self.normal_image = pygame.transform.scale(image, (int(width * scale), int(height * scale)))
+        self.hover_image = pygame.transform.scale(hover_image, (int(width * scale), int(height * scale)))
+
+        # Default to normal image
+        self.image = self.normal_image
+        self.rect = self.image.get_rect()
+        self.rect.topleft = (x, y)
+        self.clicked = False
+
+    def draw(self, surface):
+        action = False
+        pos = pygame.mouse.get_pos()
+
+        # Check if mouse is hovering
+        if self.rect.collidepoint(pos):
+            self.image = self.hover_image  # Switch to hover image
+            if pygame.mouse.get_pressed()[0] == 1 and not self.clicked:
+                self.clicked = True
+                action = True
+        else:
+            self.image = self.normal_image  # Switch back to normal image
+
+        if pygame.mouse.get_pressed()[0] == 0:
+            self.clicked = False
+
+        # Draw button on screen
+        surface.blit(self.image, (self.rect.x, self.rect.y))
+
+        return action
+
+
+fight_button = Button(150, 770, Fight, Fight_hover, 0.7)
+
+
 # Bullet class
 class Bullet:
     def __init__(self, x, y, speed):
