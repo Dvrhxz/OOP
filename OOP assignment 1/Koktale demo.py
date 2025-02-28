@@ -128,9 +128,6 @@ bullets_falls = False
 survival_time = 0
 start_time = 0
 
-#enemy movement
-kok_speed = 5  # Adjust speed
-kok_direction = random.choice(["left", "right"])  # Initial random direction
 
 # Game loop
 clock = pygame.time.Clock()
